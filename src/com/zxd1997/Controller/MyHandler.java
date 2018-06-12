@@ -32,7 +32,7 @@ public class MyHandler {
         }
     }
     @RequestMapping(value = "delete")
-    public String delete(HttpServletRequest request,int id,int page){
+    public String delete(HttpServletRequest request,int id){
         if (messageService.delete(id)) {
             return "forward:/find";
         } else {
