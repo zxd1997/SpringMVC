@@ -4,6 +4,7 @@ import com.zxd1997.Beans.Message;
 import com.zxd1997.DAO.MessageDao;
 import com.zxd1997.Services.MessageService;
 import com.zxd1997.Util.JDBCutil;
+import com.zxd1997.Util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,7 +83,7 @@ public class MessageServiceImpl implements MessageService {
         db.getConnection();
         try {
             System.out.println("Message com.zxd1997.Service");
-            return messageDao.find_range(10 * (n - 1) + 1, 10 * n);
+            return messageDao.find_range(Page.getN() * (n - 1) + 1, Page.getN() * n);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

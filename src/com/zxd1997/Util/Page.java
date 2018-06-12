@@ -82,6 +82,7 @@ public class Page {
     }
 
     public Page(int count, int page) {
+        System.out.println(N);
         this.count = count;
         setMaxPage();
         setPage(page);

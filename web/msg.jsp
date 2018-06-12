@@ -8,58 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-    <%--pagination {--%>
-    <%--padding: 2px;--%>
-    <%--}--%>
-
-    <%--.pagination ul {--%>
-    <%--margin: 0;--%>
-    <%--padding: 0;--%>
-    <%--text-align: left; /*Set to "right" to right align pagination interface*/--%>
-    <%--font-size: 12px;--%>
-    <%--}--%>
-
-    <%--.pagination li {--%>
-    <%--list-style-type: none;--%>
-    <%--display: inline;--%>
-    <%--padding-bottom: 1px;--%>
-    <%--}--%>
-
-    <%--.pagination a, .pagination a:visited {--%>
-    <%--padding: 0 5px;--%>
-    <%--border: 1px solid #9aafe5;--%>
-    <%--text-decoration: none;--%>
-    <%--color: #2e6ab1;--%>
-    <%--}--%>
-
-    <%--.pagination a:hover, .pagination a:active {--%>
-    <%--border: 1px solid #2b66a5;--%>
-    <%--color: #000;--%>
-    <%--background-color: lightyellow;--%>
-    <%--}--%>
-
-    <%--.pagination li.currentpage {--%>
-    <%--font-weight: bold;--%>
-    <%--padding: 0 5px;--%>
-    <%--border: 1px solid navy;--%>
-    <%--background-color: #2e6ab1;--%>
-    <%--color: #FFF;--%>
-    <%--}--%>
-
-    <%--.pagination li.disablepage {--%>
-    <%--padding: 0 5px;--%>
-    <%--border: 1px solid #929292;--%>
-    <%--color: #929292;--%>
-    <%--}--%>
-
-    <%--.pagination li.nextpage {--%>
-    <%--font-weight: bold;--%>
-    <%--}--%>
-
-    <%--* html .pagination li.currentpage, * html .pagination li.disablepage { /*IE 6 and below. Adjust non linked LIs slightly to account for bugs*/--%>
-    <%--margin-right: 5px;--%>
-    <%--padding-right: 0;--%>
-    <%--}--%>
     DIV.flickr {
         PADDING-RIGHT: 3px;
         PADDING-LEFT: 3px;
@@ -141,7 +89,7 @@
     <h3>Title:${m.title}</h3>
     <h3>Time:${m.time}</h3>
     <h3>Content:${m.content}</h3>
-    <h3><a href="/delete?id=${m.id}">Delete</a></h3>
+    <h3><a href="/delete?id=${m.id}&page=${page.page}">Delete</a></h3>
 </c:forEach>
 
 <div class="flickr">
@@ -175,7 +123,12 @@
             <span class="nextpage"><a href="/find?page=${page.maxPage}">尾页</a></span>
         </c:otherwise>
     </c:choose>
-
+    <br>
+    <form name="page" action="/change" method="post">
+        <span class="A">更改单页显示条数</span>
+        <input type="number" name="num">
+        <span class="A"><input type="submit" value="更改"></span>
+    </form>
 </div>
 </body>
 </html>

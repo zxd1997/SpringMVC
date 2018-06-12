@@ -14,9 +14,9 @@ public class MyHandler {
     @Autowired
     MessageService messageService;
     @RequestMapping(value = "/find")
-    public String find(HttpServletRequest request,String page){
+    public String find(HttpServletRequest request,int page){
         System.out.println("____MyHandler____find()");
-        Page pages=new Page(messageService.getPages(),Integer.valueOf(page));
+        Page pages=new Page(messageService.getPages(), page);
         request.setAttribute("list",messageService.find_page(pages.getPage()));
         request.setAttribute("page",pages);
         return "forward:msg.jsp";
@@ -32,12 +32,18 @@ public class MyHandler {
         }
     }
     @RequestMapping(value = "delete")
-    public String delete(HttpServletRequest request,String id){
-        if (messageService.delete(Integer.valueOf(id))) {
-            return "forward:/find?page=1";
+    public String delete(HttpServletRequest request,int id,int page){
+        if (messageService.delete(id)) {
+            return "forward:/find";
         } else {
             request.setAttribute("msg", "Delete failed");
             return "forward:msgworng.jsp";
         }
+    }
+    @RequestMapping(value = "change")
+    public String change(int num){
+        Page.setN(num);
+        System.out.println(num);
+        return "forward:/find?page=1";
     }
 }
